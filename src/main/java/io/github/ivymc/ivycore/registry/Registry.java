@@ -1,26 +1,20 @@
 package io.github.ivymc.ivycore.registry;
 
+import io.github.ivymc.ivycore.helpers.ThrowingConsumer;
+
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
-public interface Registry <K, V> {
-    V register(K id, V value);
-    V getEntry(K id);
+public interface Registry <V,T> {
+    Iterable<V> getValues();
+    List<V> getListValues();
+    Optional<V> getRandomValue();
+    void invoke(T value);
+    static <K,V,T> HashRegistry<K,V,T> of(Class<K> keyType, ThrowingConsumer<T> invoke) {
+        return new SimpleHashRegistry<>(invoke);
+    }
 
-    V getEntryOrDefault(K key, V defaultValue);
-
-    V getDefaultValue();
-
-    Iterable<Map.Entry<K, V>> getEntries();
-
-    List<Map.Entry<K, V>> getListEntries();
-
-    Optional<V> getOptionalEntry(K id);
-
-    Optional<Map.Entry<K,V>> getRandom();
-
-    static <K,V> Registry<K,V> getInstance(Class<K> keyType, V defaultValue) {
-        return new SimpleRegistry<>(defaultValue);
+    static <V,T> SetRegistry<V,T> of(ThrowingConsumer<T> invoke) {
+        return new SimpleSetRegistry<>(invoke);
     }
 }

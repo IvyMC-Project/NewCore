@@ -1,5 +1,6 @@
 package io.github.ivymc.ivycore.registry;
 
+import io.github.ivymc.ivycore.helpers.ThrowingConsumer;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.random.Random;
 
@@ -9,13 +10,13 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-public class SimpleRegistry <K, V> implements Registry <K, V>{
+public class SimpleHashRegistry<K, V, T> implements HashRegistry<K, V, T> {
     private final ConcurrentMap<K, V> registry = new ConcurrentHashMap<>();
     private final Random random = Random.create();
-    private final V defaultValue;
+    private final ThrowingConsumer<T> invokeFunction;
 
-    public SimpleRegistry(V defaultValue) {
-        this.defaultValue = defaultValue;
+    public SimpleHashRegistry(ThrowingConsumer<T> invoke) {
+        this.invokeFunction = invoke;
     }
 
     @Override
@@ -33,10 +34,6 @@ public class SimpleRegistry <K, V> implements Registry <K, V>{
         return registry.getOrDefault(key, defaultValue);
     }
 
-    @Override
-    public V getDefaultValue() {
-        return defaultValue;
-    }
 
     @Override
     public Iterable<Map.Entry<K, V>> getEntries() {
@@ -54,7 +51,27 @@ public class SimpleRegistry <K, V> implements Registry <K, V>{
     }
 
     @Override
-    public Optional<Map.Entry<K,V>> getRandom() {
+    public Optional<Map.Entry<K,V>> getRandomEntry() {
         return Util.getRandomOrEmpty(getListEntries(), random);
+    }
+
+    @Override
+    public Iterable<V> getValues() {
+        return registry.values();
+    }
+
+    @Override
+    public List<V> getListValues() {
+        return List.copyOf(registry.values());
+    }
+
+    @Override
+    public Optional<V> getRandomValue() {
+        return Util.getRandomOrEmpty(getListValues(), random);
+    }
+
+    @Override
+    public void invoke(T value) {
+        invokeFunction.accept(value);
     }
 }
