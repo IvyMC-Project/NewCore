@@ -1,24 +1,25 @@
 package io.github.ivymc.ivycore;
 
-import com.google.gson.JsonObject;
-import io.github.ivymc.ivycore.config.ConfigBuilder;
-import io.github.ivymc.ivycore.config.ConfigData;
-import io.github.ivymc.ivycore.registry.RegistryBuilder;
-import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import io.github.ivymc.ivycore.events.ModLoadingEvent;
+import io.github.ivymc.ivycore.registry.RegistryManager;
+import net.fabricmc.api.ModInitializer;
 
-import java.nio.file.Path;
-
-public class Main implements PreLaunchEntrypoint {
-    private static final Global g = new Global("ivycore");
-
+public class Main implements ModInitializer {
     @Override
-    public void onPreLaunch() {
-        g.LOGGER.info("-------------------------------------------------------------");
-        g.LOGGER.info("Thanks for installing our mod!");
-        g.LOGGER.info("Created by IvyMC project");
-        g.LOGGER.info("Check our other projects at https://github.com/IvyMC-Project/");
-        g.LOGGER.info("-------------------------------------------------------------");
+    public void onInitialize() {
+        PreMain.g.getLogger().info("Loading mods...");
+        loadMods();
+    }
+
+    private void loadMods() {
+        for (var entry : RegistryManager.MOD_REGISTRY.getEntries()) {
+            var key = entry.getKey();
+            try {
+                PreMain.g.getLogger().info("Loaded mod: " + key);
+                entry.getValue().acceptThrows(new ModLoadingEvent(key));
+            } catch (Exception err) {
+                PreMain.g.getLogger().error("Failed to load mod: " + key + "\n" + err.getMessage());
+            }
+        }
     }
 }
