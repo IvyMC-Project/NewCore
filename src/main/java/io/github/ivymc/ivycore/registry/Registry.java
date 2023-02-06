@@ -10,11 +10,11 @@ public interface Registry <V,T> {
     List<V> getListValues();
     Optional<V> getRandomValue();
     void invoke(T value);
-    static <K,V,T> HashRegistry<K,V,T> of(Class<K> keyType, ThrowingConsumer<T> invoke) {
+    static <V,T> HashRegistry<V,T> ofHash(ThrowingConsumer<T> invoke) {
         return new SimpleHashRegistry<>(invoke);
     }
 
-    static <V,T> SetRegistry<V,T> of(ThrowingConsumer<T> invoke) {
+    static <V,T> SetRegistry<V,T> ofSet(ThrowingConsumer<T> invoke) {
         return new SimpleSetRegistry<>(invoke);
     }
 }

@@ -1,20 +1,22 @@
 package io.github.ivymc.ivycore.registry;
 
+import io.github.ivymc.ivycore.helpers.Identifier;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public interface HashRegistry<K, V, T> extends Registry<V, T> {
-    V register(K id, V value);
-    V getEntry(K id);
+public interface HashRegistry<V, T> extends Registry<V, T> {
+    V register(Identifier id, V value);
+    V getEntry(Identifier id);
 
-    V getEntryOrDefault(K key, V defaultValue);
+    V getEntryOrDefault(Identifier key, V defaultValue);
 
-    Iterable<Map.Entry<K, V>> getEntries();
+    Iterable<Map.Entry<Identifier, V>> getEntries();
 
-    List<Map.Entry<K, V>> getListEntries();
+    List<Map.Entry<Identifier, V>> getListEntries();
 
-    Optional<V> getOptionalEntry(K id);
+    Optional<V> getOptionalEntry(Identifier id);
 
-    Optional<Map.Entry<K,V>> getRandomEntry();
+    Optional<Map.Entry<Identifier,V>> getRandomEntry();
 }
