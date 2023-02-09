@@ -1,5 +1,6 @@
-package io.github.ivymc.ivycore.events;
+package io.github.ivymc.ivycore.events.impl;
 
+import io.github.ivymc.ivycore.events.Event;
 import io.github.ivymc.ivycore.helpers.Global;
 
 public class ModLoadingEvent implements Event {

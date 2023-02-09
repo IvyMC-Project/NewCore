@@ -1,6 +1,8 @@
 package io.github.ivymc.ivycore.registry;
 
 import io.github.ivymc.ivycore.helpers.ThrowingConsumer;
+import io.github.ivymc.ivycore.registry.impl.SimpleHashRegistry;
+import io.github.ivymc.ivycore.registry.impl.SimpleSetRegistry;
 
 import java.util.List;
 import java.util.Optional;

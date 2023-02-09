@@ -1,7 +1,8 @@
-package io.github.ivymc.ivycore.registry;
+package io.github.ivymc.ivycore.registry.impl;
 
 import io.github.ivymc.ivycore.helpers.Identifier;
 import io.github.ivymc.ivycore.helpers.ThrowingConsumer;
+import io.github.ivymc.ivycore.registry.HashRegistry;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.random.Random;
 

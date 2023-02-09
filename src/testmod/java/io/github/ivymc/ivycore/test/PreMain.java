@@ -4,11 +4,14 @@ import io.github.ivymc.ivycore.helpers.Identifier;
 import io.github.ivymc.ivycore.registry.RegistryManager;
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
 
+import java.util.TreeMap;
+
 public class PreMain implements PreLaunchEntrypoint {
+    private static final int AMOUNT = 1000;
     @Override
     public void onPreLaunch() {
-        RegistryManager.MOD_REGISTRY.register(Identifier.of("test"), Main::onInitialize);
-        RegistryManager.MOD_REGISTRY.register(Identifier.of("test1"), Main::onInitialize);
-        RegistryManager.MOD_REGISTRY.register(Identifier.of("test2"), Main::onInitialize);
+        for (int i = 0; i < AMOUNT; i++) {
+            RegistryManager.MOD_REGISTRY.register(Identifier.of("testmod" + i), Main::onInitialize);
+        }
     }
 }
