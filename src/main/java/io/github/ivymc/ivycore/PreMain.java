@@ -4,7 +4,7 @@ import io.github.ivymc.ivycore.helpers.Global;
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
 
 public class PreMain implements PreLaunchEntrypoint {
-    public static Global g = new Global("ivycore");
+    public static final Global g = new Global("ivycore");
     @Override
     public void onPreLaunch() {
         g.getLogger().info("-------------------------------------------------------------");

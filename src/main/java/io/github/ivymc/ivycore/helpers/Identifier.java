@@ -1,6 +1,8 @@
 package io.github.ivymc.ivycore.helpers;
 
-public class Identifier {
+import org.jetbrains.annotations.NotNull;
+
+public class Identifier implements Comparable<Identifier> {
     private final String namespace;
     private final String path;
 
@@ -34,4 +36,8 @@ public class Identifier {
         return new Identifier(path);
     }
 
+    @Override
+    public int compareTo(@NotNull Identifier o) {
+        return this.toString().compareTo(o.toString());
+    }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public interface HashRegistry<V, T> extends Registry<V, T> {
+public interface MapRegistry<V, T> extends Registry<V, T> {
     V register(Identifier id, V value);
     V getEntry(Identifier id);
 

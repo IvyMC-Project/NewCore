@@ -5,10 +5,7 @@ import io.github.ivymc.ivycore.registry.SetRegistry;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.random.Random;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class SimpleSetRegistry<V,T> implements SetRegistry<V,T> {
     private final Set<V> registry = new HashSet<>();

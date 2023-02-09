@@ -2,22 +2,17 @@ package io.github.ivymc.ivycore.registry.impl;
 
 import io.github.ivymc.ivycore.helpers.Identifier;
 import io.github.ivymc.ivycore.helpers.ThrowingConsumer;
-import io.github.ivymc.ivycore.registry.HashRegistry;
-import net.minecraft.util.Util;
-import net.minecraft.util.math.random.Random;
+import io.github.ivymc.ivycore.helpers.Utils;
+import io.github.ivymc.ivycore.registry.MapRegistry;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.*;
 
-public class SimpleHashRegistry<V, T> implements HashRegistry<V, T> {
-    private final ConcurrentMap<Identifier, V> registry = new ConcurrentHashMap<>();
-    private final Random random = Random.create();
+public class SimpleMapRegistry<V, T> implements MapRegistry<V, T> {
+    private final Map<Identifier, V> registry = new HashMap<>();
+    private final Random random = new Random();
     private final ThrowingConsumer<T> invokeFunction;
 
-    public SimpleHashRegistry(ThrowingConsumer<T> invoke) {
+    public SimpleMapRegistry(ThrowingConsumer<T> invoke) {
         this.invokeFunction = invoke;
     }
 
@@ -54,7 +49,7 @@ public class SimpleHashRegistry<V, T> implements HashRegistry<V, T> {
 
     @Override
     public Optional<Map.Entry<Identifier,V>> getRandomEntry() {
-        return Util.getRandomOrEmpty(getListEntries(), random);
+        return Utils.getRandomOrEmpty(getListEntries(), random);
     }
 
     @Override
@@ -69,7 +64,7 @@ public class SimpleHashRegistry<V, T> implements HashRegistry<V, T> {
 
     @Override
     public Optional<V> getRandomValue() {
-        return Util.getRandomOrEmpty(getListValues(), random);
+        return Utils.getRandomOrEmpty(getListValues(), random);
     }
 
     @Override
