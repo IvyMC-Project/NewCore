@@ -1,22 +1,21 @@
 package io.github.ivymc.ivycore.registry;
 
-import io.github.ivymc.ivycore.helpers.Identifier;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public interface MapRegistry<V, T> extends Registry<V, T> {
-    V register(Identifier id, V value);
-    V getEntry(Identifier id);
+@SuppressWarnings("unused")
+public interface MapRegistry<K extends Comparable<?>, V, T> extends Registry<V, T> {
+    V register(K id, V value);
+    V getEntry(K id);
 
-    V getEntryOrDefault(Identifier key, V defaultValue);
+    V getEntryOrDefault(K key, V defaultValue);
 
-    Iterable<Map.Entry<Identifier, V>> getEntries();
+    Iterable<Map.Entry<K, V>> getEntries();
 
-    List<Map.Entry<Identifier, V>> getListEntries();
+    List<Map.Entry<K, V>> getListEntries();
 
-    Optional<V> getOptionalEntry(Identifier id);
+    Optional<V> getOptionalEntry(K id);
 
-    Optional<Map.Entry<Identifier,V>> getRandomEntry();
+    Optional<Map.Entry<K,V>> getRandomEntry();
 }

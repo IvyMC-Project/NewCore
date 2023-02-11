@@ -3,6 +3,7 @@ package io.github.ivymc.ivycore.helpers;
 import java.util.function.Consumer;
 
 @FunctionalInterface
+@SuppressWarnings("unused")
 public interface ThrowingConsumer<T> extends Consumer<T> {
 
     @Override

@@ -1,9 +1,9 @@
 package io.github.ivymc.ivycore.helpers;
 
-import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@SuppressWarnings("unused")
 public class Global {
     private final String id;
     private final Logger logger;
@@ -14,7 +14,7 @@ public class Global {
     }
 
     public Identifier idOf(String path) {
-        return new Identifier(id, path);
+        return Identifier.of(id, path);
     }
 
     public Logger getLogger() {

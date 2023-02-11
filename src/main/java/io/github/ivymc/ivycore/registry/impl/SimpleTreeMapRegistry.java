@@ -1,14 +1,14 @@
 package io.github.ivymc.ivycore.registry.impl;
 
-import io.github.ivymc.ivycore.helpers.Identifier;
 import io.github.ivymc.ivycore.helpers.ThrowingConsumer;
 import io.github.ivymc.ivycore.helpers.Utils;
 import io.github.ivymc.ivycore.registry.MapRegistry;
 
 import java.util.*;
 
-public class SimpleTreeMapRegistry<V,T> implements MapRegistry<V,T> {
-    private final Map<Identifier, V> registry = new TreeMap<>();
+@SuppressWarnings("unused")
+public class SimpleTreeMapRegistry<K extends Comparable<?>,V,T> implements MapRegistry<K,V,T> {
+    private final Map<K, V> registry = new TreeMap<>();
     private final Random random = new Random();
     private final ThrowingConsumer<T> invokeFunction;
     public SimpleTreeMapRegistry(ThrowingConsumer<T> invokeFunction) {
@@ -17,37 +17,37 @@ public class SimpleTreeMapRegistry<V,T> implements MapRegistry<V,T> {
 
 
     @Override
-    public V register(Identifier id, V value) {
+    public V register(K id, V value) {
         return registry.put(id, value);
     }
 
     @Override
-    public V getEntry(Identifier id) {
+    public V getEntry(K id) {
         return registry.get(id);
     }
 
     @Override
-    public V getEntryOrDefault(Identifier key, V defaultValue) {
+    public V getEntryOrDefault(K key, V defaultValue) {
         return registry.getOrDefault(key, defaultValue);
     }
 
     @Override
-    public Iterable<Map.Entry<Identifier, V>> getEntries() {
+    public Iterable<Map.Entry<K, V>> getEntries() {
         return registry.entrySet();
     }
 
     @Override
-    public List<Map.Entry<Identifier, V>> getListEntries() {
+    public List<Map.Entry<K, V>> getListEntries() {
         return List.copyOf(registry.entrySet());
     }
 
     @Override
-    public Optional<V> getOptionalEntry(Identifier id) {
+    public Optional<V> getOptionalEntry(K id) {
         return Optional.ofNullable(registry.get(id));
     }
 
     @Override
-    public Optional<Map.Entry<Identifier, V>> getRandomEntry() {
+    public Optional<Map.Entry<K, V>> getRandomEntry() {
         return Utils.getRandomOrEmpty(getListEntries(), random);
     }
 

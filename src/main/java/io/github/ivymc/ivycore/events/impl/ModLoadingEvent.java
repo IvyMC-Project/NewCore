@@ -3,6 +3,7 @@ package io.github.ivymc.ivycore.events.impl;
 import io.github.ivymc.ivycore.events.Event;
 import io.github.ivymc.ivycore.helpers.Global;
 
+@SuppressWarnings("unused")
 public class ModLoadingEvent implements Event {
     private final String name;
     private final Global g;

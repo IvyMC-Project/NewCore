@@ -2,6 +2,7 @@ package io.github.ivymc.ivycore.helpers;
 
 import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("unused")
 public class Identifier implements Comparable<Identifier> {
     private final String namespace;
     private final String path;

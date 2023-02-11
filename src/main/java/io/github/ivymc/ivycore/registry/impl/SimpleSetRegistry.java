@@ -7,6 +7,7 @@ import net.minecraft.util.math.random.Random;
 
 import java.util.*;
 
+@SuppressWarnings("unused")
 public class SimpleSetRegistry<V,T> implements SetRegistry<V,T> {
     private final Set<V> registry = new HashSet<>();
     private final Random random = Random.create();
