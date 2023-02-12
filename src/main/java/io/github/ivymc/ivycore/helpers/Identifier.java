@@ -3,28 +3,8 @@ package io.github.ivymc.ivycore.helpers;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
-public class Identifier implements Comparable<Identifier> {
-    private final String namespace;
-    private final String path;
-
-    private Identifier(String namespace, String path) {
-        this.namespace = namespace;
-        this.path = path;
-    }
-
-    private Identifier(String path) {
-        this.namespace = "ivycore";
-        this.path = path;
-    }
-
-    public String getNamespace() {
-        return namespace;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
+public record Identifier(String namespace, String path) implements Comparable<Identifier> {
+    @Override
     public String toString() {
         return namespace + ":" + path;
     }
@@ -34,11 +14,11 @@ public class Identifier implements Comparable<Identifier> {
     }
 
     public static Identifier of(String path) {
-        return new Identifier(path);
+        return new Identifier("ivycore",path);
     }
 
     @Override
     public int compareTo(@NotNull Identifier o) {
-        return this.toString().compareTo(o.toString());
+        return equals(o) ? 0 : toString().compareTo(o.toString());
     }
 }

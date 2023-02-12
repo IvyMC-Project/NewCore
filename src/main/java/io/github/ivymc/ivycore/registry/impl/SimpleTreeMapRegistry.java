@@ -53,7 +53,7 @@ public class SimpleTreeMapRegistry<K extends Comparable<?>,V,T> implements MapRe
 
     @Override
     public Iterable<V> getValues() {
-        return registry.values();
+        return List.copyOf(registry.values());
     }
 
     @Override

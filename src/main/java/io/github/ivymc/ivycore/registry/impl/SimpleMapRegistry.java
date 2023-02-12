@@ -35,7 +35,7 @@ public class SimpleMapRegistry<K extends Comparable<?>,V,T> implements MapRegist
 
     @Override
     public Iterable<Map.Entry<K, V>> getEntries() {
-        return registry.entrySet();
+        return List.copyOf(registry.entrySet());
     }
 
     @Override
@@ -55,7 +55,7 @@ public class SimpleMapRegistry<K extends Comparable<?>,V,T> implements MapRegist
 
     @Override
     public Iterable<V> getValues() {
-        return registry.values();
+        return List.copyOf(registry.values());
     }
 
     @Override
