@@ -1,4 +1,4 @@
-package io.github.ivymc.ivycore.helpers;
+package io.github.ivymc.ivycore.utils;
 
 import java.util.function.Consumer;
 

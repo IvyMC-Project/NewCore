@@ -1,8 +1,11 @@
 package io.github.ivymc.ivycore.registry;
 
+import io.github.ivymc.ivycore.utils.ListHelper;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 @SuppressWarnings("unused")
 public interface MapRegistry<K extends Comparable<?>, V, T> extends Registry<V, T> {
@@ -11,11 +14,17 @@ public interface MapRegistry<K extends Comparable<?>, V, T> extends Registry<V, 
 
     V getEntryOrDefault(K key, V defaultValue);
 
-    Iterable<Map.Entry<K, V>> getEntries();
-
     List<Map.Entry<K, V>> getListEntries();
 
-    Optional<V> getOptionalEntry(K id);
+    default Optional<V> getOptionalEntry(K id) {
+        return Optional.ofNullable(getEntry(id));
+    }
 
-    Optional<Map.Entry<K,V>> getRandomEntry();
+    default Optional<Map.Entry<K,V>> getRandomEntry() {
+        return ListHelper.getRandomOrEmpty(getListEntries());
+    }
+
+    default Iterable<Map.Entry<K, V>> getEntries() {
+        return Set.copyOf(getListEntries());
+    }
 }

@@ -1,4 +1,4 @@
-package io.github.ivymc.ivycore.helpers;
+package io.github.ivymc.ivycore.utils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -20,5 +20,9 @@ public record Identifier(String namespace, String path) implements Comparable<Id
     @Override
     public int compareTo(@NotNull Identifier o) {
         return equals(o) ? 0 : toString().compareTo(o.toString());
+    }
+
+    public net.minecraft.util.Identifier toMinecraft() {
+        return new net.minecraft.util.Identifier(namespace, path);
     }
 }

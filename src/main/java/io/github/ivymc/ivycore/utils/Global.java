@@ -1,4 +1,4 @@
-package io.github.ivymc.ivycore.helpers;
+package io.github.ivymc.ivycore.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -3,12 +3,13 @@ package io.github.ivymc.ivycore.registry;
 import io.github.ivymc.ivycore.PreMain;
 import io.github.ivymc.ivycore.events.impl.ItemUseEvent;
 import io.github.ivymc.ivycore.events.impl.ModLoadingEvent;
-import io.github.ivymc.ivycore.helpers.Global;
-import io.github.ivymc.ivycore.helpers.ThrowingConsumer;
+import io.github.ivymc.ivycore.utils.Global;
+import io.github.ivymc.ivycore.utils.ThrowingConsumer;
 import oshi.util.tuples.Pair;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 @SuppressWarnings("unused")
 public class RegistryManager {
@@ -26,12 +27,12 @@ public class RegistryManager {
         }
     });
 
-    public static final SetRegistry<ThrowingConsumer<ItemUseEvent>, Pair<List<ThrowingConsumer<ItemUseEvent>>,ItemUseEvent>> ITEM_USE_REGISTRY = Registry.ofSet((pair) -> {
+    public static final SetRegistry<Consumer<ItemUseEvent>, Pair<List<Consumer<ItemUseEvent>>,ItemUseEvent>> ITEM_USE_REGISTRY = Registry.ofSet((pair) -> {
         var entries = pair.getA();
         var itemEvent = pair.getB();
 
         for (var entry : entries) {
-            entry.acceptThrows(itemEvent);
+            entry.accept(itemEvent);
         }
     });
 }

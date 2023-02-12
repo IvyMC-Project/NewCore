@@ -1,7 +1,7 @@
 package io.github.ivymc.ivycore;
 
 import com.llamalad7.mixinextras.MixinExtrasBootstrap;
-import io.github.ivymc.ivycore.helpers.Global;
+import io.github.ivymc.ivycore.utils.Global;
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
 
 public class PreMain implements PreLaunchEntrypoint {
