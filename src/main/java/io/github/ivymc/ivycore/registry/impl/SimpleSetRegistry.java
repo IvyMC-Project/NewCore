@@ -19,7 +19,7 @@ public class SimpleSetRegistry<V,T> implements SetRegistry<V,T> {
 
     @Override
     public Iterable<V> getValues() {
-        return List.copyOf(registry);
+        return Set.copyOf(registry);
     }
 
     @Override
