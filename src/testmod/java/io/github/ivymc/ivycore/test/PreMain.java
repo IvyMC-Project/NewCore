@@ -9,6 +9,10 @@ public class PreMain implements PreLaunchEntrypoint {
     @Override
     public void onPreLaunch() {
         var a = RegistryManager.MOD_REGISTRY.register("testmod", Main::onInitialize);
-        a.accept(new ModLoadingEvent(new Global("testmod")));
+        try {
+            a.accept(new ModLoadingEvent(new Global("testmod")));
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
     }
 }

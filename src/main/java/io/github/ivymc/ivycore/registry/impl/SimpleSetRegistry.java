@@ -5,7 +5,10 @@ import io.github.ivymc.ivycore.registry.SetRegistry;
 
 import java.util.*;
 
-@SuppressWarnings("unused")
+/**
+ * @param <V> Value type
+ * @param <T> Invoke argument type
+ */
 public class SimpleSetRegistry<V,T> implements SetRegistry<V,T> {
     private final Set<V> registry = new HashSet<>();
     private final ThrowingConsumer<T> invokeFunction;

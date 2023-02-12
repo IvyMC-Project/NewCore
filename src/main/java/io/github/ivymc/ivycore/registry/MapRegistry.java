@@ -7,7 +7,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-@SuppressWarnings("unused")
+/**
+ * @param <K> Key type (must be comparable)
+ * @param <V> Value type
+ * @param <T> Invoke argument type
+ */
 public interface MapRegistry<K extends Comparable<?>, V, T> extends Registry<V, T> {
     V register(K id, V value);
     V getEntry(K id);

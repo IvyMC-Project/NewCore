@@ -2,7 +2,6 @@ package io.github.ivymc.ivycore.utils;
 
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("unused")
 public record Identifier(String namespace, String path) implements Comparable<Identifier> {
     @Override
     public String toString() {

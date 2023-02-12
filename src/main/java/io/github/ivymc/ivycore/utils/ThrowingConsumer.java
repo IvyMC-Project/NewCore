@@ -3,7 +3,6 @@ package io.github.ivymc.ivycore.utils;
 import java.util.function.Consumer;
 
 @FunctionalInterface
-@SuppressWarnings("unused")
 public interface ThrowingConsumer<T> extends Consumer<T> {
 
     @Override
@@ -15,9 +14,9 @@ public interface ThrowingConsumer<T> extends Consumer<T> {
         }
     }
 
-    void acceptThrows(T elem) throws Exception;
+    void acceptThrows(T elem) throws RuntimeException;
 
-    static <T> ThrowingConsumer<T> getDefault(Class<T> clazz) {
+    static <T> ThrowingConsumer<T> getDefault() {
         return c -> {};
     }
 }

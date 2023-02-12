@@ -5,8 +5,17 @@ import io.github.ivymc.ivycore.registry.MapRegistry;
 
 import java.util.*;
 
-@SuppressWarnings("unused")
-public class SimpleMapRegistry<K extends Comparable<?>,V,T> implements MapRegistry<K,V,T> {
+/**
+ * @param <K> Key type (must be comparable)
+ * @param <V> Value type
+ * @param <T> Invoke argument type
+ */
+public class SimpleMapRegistry<
+        K extends Comparable<?>,
+        V,
+        T
+        >
+        implements MapRegistry<K,V,T> {
     private final Map<K, V> registry = new HashMap<>();
     private final ThrowingConsumer<T> invokeFunction;
 

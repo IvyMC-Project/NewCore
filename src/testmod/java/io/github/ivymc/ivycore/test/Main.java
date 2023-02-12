@@ -1,12 +1,15 @@
 package io.github.ivymc.ivycore.test;
 
 import io.github.ivymc.ivycore.events.impl.ModLoadingEvent;
+import io.github.ivymc.ivycore.registry.RegistryManager;
+
+import java.util.Arrays;
 
 public class Main {
+    private Main() {}
     public static void onInitialize(ModLoadingEvent event) {
-        System.out.println("Hello Fabric world!");
-//        if (event.global().id().startsWith("testmod" + Random.create().nextInt(100))) {
-//            throw new RuntimeException("failed to load");
-//        }
+        event.global().getLogger().info("Hello Fabric world!");
+        var list = RegistryManager.MOD_REGISTRY.getListValues();
+        event.global().getLogger().info(Arrays.deepToString(list.toArray()));
     }
 }

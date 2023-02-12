@@ -5,7 +5,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 
-public record ItemUseEvent(ServerWorld world, ServerPlayerEntity player, ItemStack itemStack) implements Event {
+public record ItemUseEvent(
+        ServerWorld world,
+        ServerPlayerEntity player,
+        ItemStack itemStack
+) implements Event {
     @Override
     public Class<? extends Event> getType() {
         return ItemUseEvent.class;

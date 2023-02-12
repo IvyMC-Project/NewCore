@@ -17,15 +17,19 @@ import oshi.util.tuples.Pair;
 @Mixin(ServerPlayerInteractionManager.class)
 public class ServerPlayerInteractionManagerMixin {
 
-    @ModifyReceiver(method = "interactItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;use(Lnet/minecraft/world/World;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/TypedActionResult;"))
+    @ModifyReceiver(
+            method = "interactItem",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/item/ItemStack;use(Lnet/minecraft/world/World;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/TypedActionResult;"
+            )
+    )
     public ItemStack onItemUse(ItemStack itemStack,World world, PlayerEntity user, Hand hand) {
         if (!(user instanceof ServerPlayerEntity player)) return itemStack;
 
         ServerWorld serverWorld = player.getWorld();
 
-        try {
-            RegistryManager.ITEM_USE_REGISTRY.invoke(new Pair<>(RegistryManager.ITEM_USE_REGISTRY.getListValues(), new ItemUseEvent(serverWorld, player, itemStack)));
-        } catch (Exception ignored) {}
+        RegistryManager.ITEM_USE_REGISTRY.invoke(new Pair<>(RegistryManager.ITEM_USE_REGISTRY.getListValues(), new ItemUseEvent(serverWorld, player, itemStack)));
 
         return itemStack;
     }

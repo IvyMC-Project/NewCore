@@ -11,11 +11,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-@SuppressWarnings("unused")
 public class RegistryManager {
-    public static final MapRegistry<String,ThrowingConsumer<ModLoadingEvent>, Iterable<Map.Entry<String, ThrowingConsumer<ModLoadingEvent>>>> MOD_REGISTRY = Registry.ofTreeMap((entries) -> {
-        PreMain.g.getLogger().info("Loading mods...");
-        for (var entry : entries) {
+    private RegistryManager() {}
+    public static final MapRegistry<
+            String,
+            ThrowingConsumer<ModLoadingEvent>,
+            Iterable<Map.Entry<String, ThrowingConsumer<ModLoadingEvent>>>
+        > MOD_REGISTRY = Registry.ofTreeMap(entries -> {
+            PreMain.g.getLogger().info("Loading mods...");
+            for (var entry : entries) {
             var key = entry.getKey();
             try {
                 entry.getValue().acceptThrows(new ModLoadingEvent(new Global(key)));
@@ -27,12 +31,15 @@ public class RegistryManager {
         }
     });
 
-    public static final SetRegistry<Consumer<ItemUseEvent>, Pair<List<Consumer<ItemUseEvent>>,ItemUseEvent>> ITEM_USE_REGISTRY = Registry.ofSet((pair) -> {
-        var entries = pair.getA();
-        var itemEvent = pair.getB();
+    public static final SetRegistry<
+            Consumer<ItemUseEvent>,
+            Pair<List<Consumer<ItemUseEvent>>,ItemUseEvent>
+        > ITEM_USE_REGISTRY = Registry.ofSet(pair -> {
+            var entries = pair.getA();
+            var itemEvent = pair.getB();
 
-        for (var entry : entries) {
-            entry.accept(itemEvent);
-        }
+            for (var entry : entries) {
+                entry.accept(itemEvent);
+            }
     });
 }
