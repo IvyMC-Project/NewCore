@@ -12,7 +12,11 @@ import java.util.Set;
  * @param <V> Value type
  * @param <T> Invoke argument type
  */
-public interface MapRegistry<K extends Comparable<?>, V, T> extends Registry<V, T> {
+public interface MapRegistry<
+        K extends Comparable<?>,
+        V,
+        T
+        > extends Registry<V, T> {
     V register(K id, V value);
     V getEntry(K id);
 

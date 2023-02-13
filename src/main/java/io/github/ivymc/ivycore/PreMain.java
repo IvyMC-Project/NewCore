@@ -1,18 +1,18 @@
 package io.github.ivymc.ivycore;
 
 import com.llamalad7.mixinextras.MixinExtrasBootstrap;
-import io.github.ivymc.ivycore.utils.Global;
+import io.github.ivymc.ivycore.events.impl.ModLoadingEvent;
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
 
 public class PreMain implements PreLaunchEntrypoint {
-    public static final Global g = new Global("ivycore");
+    public static final ModLoadingEvent mod = new ModLoadingEvent("ivycore");
     @Override
     public void onPreLaunch() {
         MixinExtrasBootstrap.init();
-        g.getLogger().info("-------------------------------------------------------------");
-        g.getLogger().info("Thanks for installing our mod!");
-        g.getLogger().info("Created by IvyMC project");
-        g.getLogger().info("Check our other projects at https://github.com/IvyMC-Project/");
-        g.getLogger().info("-------------------------------------------------------------");
+        mod.getLogger().info("-------------------------------------------------------------");
+        mod.getLogger().info("Thanks for installing our mod!");
+        mod.getLogger().info("Created by IvyMC project");
+        mod.getLogger().info("Check our other projects at https://github.com/IvyMC-Project/");
+        mod.getLogger().info("-------------------------------------------------------------");
     }
 }

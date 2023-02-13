@@ -4,6 +4,7 @@ import io.github.ivymc.ivycore.utils.ThrowingConsumer;
 import io.github.ivymc.ivycore.registry.MapRegistry;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 /**
  * @param <K> Key type (must be comparable)
@@ -12,7 +13,7 @@ import java.util.*;
  */
 public class SimpleTreeMapRegistry<
         K extends Comparable<?>,
-        V,
+        V extends Consumer<?>,
         T
         > implements MapRegistry<K,V,T> {
     private final Map<K, V> registry = new TreeMap<>();

@@ -9,6 +9,7 @@ import io.github.ivymc.ivycore.registry.impl.SimpleTreeMapRegistry;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Consumer;
 
 @SuppressWarnings("unused")
 public interface Registry <V,T> {
@@ -24,15 +25,22 @@ public interface Registry <V,T> {
         return Set.copyOf(getListValues());
     }
 
-    static <K extends Comparable<?>,V,T> MapRegistry<K,V,T> ofTreeMap(ThrowingConsumer<T> invoke) {
+    static <K extends Comparable<?>,
+            V extends Consumer<?>,
+            T
+            > MapRegistry<K,V,T> ofTreeMap(ThrowingConsumer<T> invoke) {
         return new SimpleTreeMapRegistry<>(invoke);
     }
 
-    static <V,T> SetRegistry<V,T> ofSet(ThrowingConsumer<T> invoke) {
+    static <V extends Consumer<?>,T> SetRegistry<V,T> ofSet(ThrowingConsumer<T> invoke) {
         return new SimpleSetRegistry<>(invoke);
     }
 
-    static <K extends Comparable<?>,V,T> MapRegistry<K,V,T> ofMap(ThrowingConsumer<T> invoke) {
+    static <
+            K extends Comparable<?>,
+            V extends Consumer<?>,
+            T
+            > MapRegistry<K,V,T> ofMap(ThrowingConsumer<T> invoke) {
         return new SimpleMapRegistry<>(invoke);
     }
 }

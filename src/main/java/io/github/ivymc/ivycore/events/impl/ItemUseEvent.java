@@ -11,7 +11,7 @@ public record ItemUseEvent(
         ItemStack itemStack
 ) implements Event {
     @Override
-    public Class<? extends Event> getType() {
+    public Class<ItemUseEvent> getType() {
         return ItemUseEvent.class;
     }
 }
