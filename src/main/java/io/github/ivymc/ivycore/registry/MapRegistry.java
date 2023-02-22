@@ -13,16 +13,18 @@ import java.util.Set;
  * @param <T> Invoke argument type
  */
 public interface MapRegistry<
-        K extends Comparable<?>,
+        K,
         V,
         T
         > extends Registry<V, T> {
     V register(K id, V value);
     V getEntry(K id);
 
-    V getEntryOrDefault(K key, V defaultValue);
-
     List<Map.Entry<K, V>> getListEntries();
+
+    default V getEntryOrDefault(K key, V defaultValue) {
+        return getOptionalEntry(key).orElse(defaultValue);
+    }
 
     default Optional<V> getOptionalEntry(K id) {
         return Optional.ofNullable(getEntry(id));

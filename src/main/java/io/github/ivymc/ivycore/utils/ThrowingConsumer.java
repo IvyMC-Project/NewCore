@@ -7,10 +7,14 @@ public interface ThrowingConsumer<T> extends Consumer<T> {
 
     @Override
     default void accept(final T elem) {
-        acceptThrows(elem);
+        try {
+            acceptThrows(elem);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    void acceptThrows(T elem) throws InvokerException;
+    void acceptThrows(T elem) throws Exception;
 
     static <T> ThrowingConsumer<T> getDefault() {
         return c -> {};

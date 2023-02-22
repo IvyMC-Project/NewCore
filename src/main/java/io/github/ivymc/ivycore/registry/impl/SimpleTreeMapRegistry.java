@@ -36,11 +36,6 @@ public class SimpleTreeMapRegistry<
     }
 
     @Override
-    public V getEntryOrDefault(K key, V defaultValue) {
-        return registry.getOrDefault(key, defaultValue);
-    }
-
-    @Override
     public List<Map.Entry<K, V>> getListEntries() {
         return List.copyOf(registry.entrySet());
     }

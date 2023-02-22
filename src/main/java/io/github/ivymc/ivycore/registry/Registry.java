@@ -11,7 +11,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 
-@SuppressWarnings("unused")
 public interface Registry <V,T> {
     List<V> getListValues();
 
@@ -36,8 +35,7 @@ public interface Registry <V,T> {
         return new SimpleSetRegistry<>(invoke);
     }
 
-    static <
-            K extends Comparable<?>,
+    static <K,
             V extends Consumer<?>,
             T
             > MapRegistry<K,V,T> ofMap(ThrowingConsumer<T> invoke) {

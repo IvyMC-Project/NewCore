@@ -12,7 +12,7 @@ import java.util.function.Consumer;
  * @param <T> Invoke argument type
  */
 public class SimpleMapRegistry<
-        K extends Comparable<?>,
+        K,
         V extends Consumer<?>,
         T
         >
@@ -33,11 +33,6 @@ public class SimpleMapRegistry<
     @Override
     public V getEntry(K key) {
         return registry.get(key);
-    }
-
-    @Override
-    public V getEntryOrDefault(K key, V defaultValue) {
-        return registry.getOrDefault(key, defaultValue);
     }
 
     @Override
